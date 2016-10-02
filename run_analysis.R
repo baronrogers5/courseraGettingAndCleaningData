@@ -41,12 +41,12 @@ activities <- read.table("activity_labels.txt")
 yData[, 1] <- activities[yData[, 1], 2]
 
 # correct column name
-names(yData) <- "activity"
+names(yData) <- "activities"
 
 # Appropriately label the data set with descriptive variable names
 
 # correct column name
-names(subjectData) <- "subject"
+names(subjectData) <- "subjects"
 
 # bind all the data in a single data set
 allData <- cbind(xData, yData, subjectData)
@@ -55,8 +55,6 @@ allData <- cbind(xData, yData, subjectData)
 # Create a second, independent tidy data set with the average of each variable
 # for each activity and each subject
 
-
-# 66 <- 68 columns but last two (activity & subject)
 averagesData <- ddply(allData, .(subject, activity), function(x) colMeans(x[, 1:66]))
 
 write.table(averagesData, "averageData.txt", row.name=FALSE)
